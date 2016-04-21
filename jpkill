@@ -1,0 +1,19 @@
+#!/bin/sh
+echo -n "Kill $1 $2... "
+NAME=`/usr/bin/jps -l | grep -i $1`
+if [ "$NAME" = "" ]; then
+  echo "Proccess $1 not found"
+  exit
+fi
+echo -n "$NAME..."
+PID=`echo $NAME | awk {'print $1'}`
+if [ "$PID" = "" ]; then
+  echo "Pid not found"
+  exit
+fi
+if [ $PID -lt 100 ]; then
+    echo "$PID < 100. abort kill"
+    exit
+fi
+kill $2 $PID &&
+echo "..Done"
