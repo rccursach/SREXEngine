@@ -37,8 +37,10 @@ public class PropReader {
 
         // Default if user defined variant of the .properties file is not present
         String prop_custom = String.format("%s%s.%s",prop_dirname, usr_file_prefix, prop_filename);
+        
+        if(!prop_dirname.equals("")){ if(!prop_dirname.endsWith("/")){ prop_dirname += "/"; }}
 
-        String p = (new File(prop_custom).exists()) ? prop_custom : String.format("%s/%s", prop_dirname, prop_filename);
+        String p = (new File(prop_custom).exists()) ? prop_custom : String.format("%s%s", prop_dirname, prop_filename);
 
         logger.info(String.format("Trying to load properties file %s", p));
 
